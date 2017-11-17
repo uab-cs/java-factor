@@ -3,19 +3,18 @@ import java.util.Scanner;
 public class Factorization {
 
 	public static double[] solvea(double a[][], int cishu) {
-         
+
 		int q = factor((int) (a[0][0])).length;
 
 		for (int j = 0; j < q; j++) {
-			System.out.println(factor((int) (a[0][0]))[j]);
+			// System.out.println(factor((int) (a[0][0]))[j]);
 		}
 
-		System.out.println("abc"+a[a.length-cishu][0]);
+		// System.out.println("abc" + a[a.length - cishu][0]);
 		int g = factor((int) (a[a.length - cishu][0])).length;
-	
 
 		for (int b = 0; b < g; b++) {
-			System.out.println(factor((int) (a[a.length - cishu][0]))[b]);
+			// System.out.println(factor((int) (a[a.length - cishu][0]))[b]);
 		}
 
 		double f[] = new double[q];
@@ -23,8 +22,6 @@ public class Factorization {
 		for (int i = 0; i < q; i++) {
 			f[i] = factor((int) a[0][0])[i];
 		}
-
-		
 
 		double vf[] = new double[q];
 
@@ -34,20 +31,18 @@ public class Factorization {
 			k[i] = factor((int) a[a.length - cishu][0])[i];
 		}
 
-		
-
 		double vk[] = new double[g];
 
 		for (int j = 0; j < q; j++) {
 
 			vf[j] = f[j] * -1;
-			System.out.println(vf[j]);
+			// System.out.println(vf[j]);
 
 		}
 		for (int i = 0; i < g; i++) {
 
 			vk[i] = k[i] * -1;
-			System.out.println(vk[i]);
+			// System.out.println(vk[i]);
 
 		}
 
@@ -70,13 +65,26 @@ public class Factorization {
 			}
 			tokena++;
 		}
-		// the upper code: The array ex includes at least one of the possible root of
+		// the upper code: The array ex includes at least one of the possible
+		// root of
 		// the first given equation.
+
+		double ex2[] = new double[ex.length * 2];
+
+		for (int i = 0; i < ex.length; i++) {
+
+			ex2[i + ex.length] = ex[i];
+
+			ex2[i] = ex[i] * -1;
+		}
+
+		// ex2 which include negative root is an expand to regular ex
+
 		int nos = 0;
 
 		for (int i = 0; i < ex.length; i++) {
 
-			if (calculation1(a, ex[i]) == 0) {
+			if (calculation1(a, ex2[i]) == 0) {
 
 				nos++;
 
@@ -92,11 +100,11 @@ public class Factorization {
 
 		System.out.println("all the root possible in the first equation are:");
 
-		for (int i = 0; i < ex.length; i++) {
+		for (int i = 0; i < ex2.length; i++) {
 
-			if (calculation1(a, ex[i]) == 0) {
+			if (calculation1(a, ex2[i]) == 0) {
 
-				solve[index] = ex[i];
+				solve[index] = ex2[i];
 
 				System.out.println(solve[index]);
 
@@ -110,7 +118,9 @@ public class Factorization {
 
 	}
 
-	public static double[][] newequation(int[][] a, double b) {
+	public static double[][] newequation(double[][] a, double b) {
+
+		System.out.println("generating new equation arrays:");
 
 		double[][] nq = new double[a.length][2];
 
@@ -130,7 +140,7 @@ public class Factorization {
 
 	}
 
-	public static double calculation(int[][] a, double b) {
+	public static double calculation(double[][] a, double b) {
 
 		double sum = 0;
 
@@ -144,7 +154,7 @@ public class Factorization {
 		return sum;
 	}
 
-	public static int[] factor(int a) {
+	public static double[] factor(double a) {
 
 		int token = 0;
 
@@ -159,7 +169,7 @@ public class Factorization {
 
 		int p = 0;
 
-		int[] fact = new int[token];
+		double[] fact = new double[token];
 
 		for (int j = 1; j <= Math.abs(a); j++) {
 
@@ -197,9 +207,9 @@ public class Factorization {
 		// System.out.println(input);
 
 		int M = 6;
-		int[][] Z;
+		double[][] Z;
 
-		Z = new int[M][2];
+		Z = new double[M][2];
 
 		Z[0][0] = 10;
 		Z[0][1] = 5;
@@ -214,7 +224,11 @@ public class Factorization {
 		Z[5][0] = -360;
 		Z[5][1] = 0;
 
-		int q = factor(Z[0][0]).length;
+		double solution[] = new double[Z.length];
+
+		int noas = 0;
+
+		double q = factor(Z[0][0]).length;
 
 		for (int j = 0; j < q; j++) {
 			System.out.println(factor(Z[0][0])[j]);
@@ -230,7 +244,7 @@ public class Factorization {
 			System.out.println(factor(Z[5][0])[b]);
 		}
 
-		double f[] = new double[q];
+		double f[] = new double[(int) q];
 
 		for (int i = 0; i < q; i++) {
 			f[i] = factor(Z[0][0])[i];
@@ -238,7 +252,7 @@ public class Factorization {
 
 		// int f[] = factor(Z[0][0]);
 
-		double vf[] = new double[q];
+		double vf[] = new double[(int) q];
 
 		double k[] = new double[g];
 
@@ -263,13 +277,13 @@ public class Factorization {
 
 		}
 
-		int bl = g * q * 2;
+		double bl = g * q * 2;
 
 		int tokena = 0;
 
 		int tokenb = 0;
 
-		double ex[] = new double[bl];
+		double ex[] = new double[(int) bl];
 
 		while (tokena < q) {
 
@@ -282,7 +296,8 @@ public class Factorization {
 			}
 			tokena++;
 		}
-		// the upper code: The array ex includes at least one of the possible root of
+		// the upper code: The array ex includes at least one of the possible
+		// root of
 		// the first given equation.
 		int nos = 0;
 
@@ -317,21 +332,69 @@ public class Factorization {
 			}
 
 		}
+		solution[noas] = solve[0];
+		noas++;
 
-		// The upper code and array solve[] arranges all the root that is correct for
+		// The upper code and array solve[] arranges all the root that is
+		// correct for
 		// the first equation.
 
 		System.out.println("the new equation is here:");
 
-		newequation(Z, solve[0]);
+		double[][] X = newequation(Z, solve[0]);
 
-		
-		
-		
-		System.out.println(solvea(newequation(Z,solve[0]),2)[0]);
-		
-		
-		
+		int cishu = 2;
+
+		double result = solvea(X, cishu)[0];
+
+		System.out.println(result);
+
+		cishu++;
+
+		while (cishu < 5) {
+
+			double op = solvea(X, cishu)[0];
+
+			X = newequation(X, op);
+
+			solution[noas] = op;
+
+			noas++;
+
+			cishu++;
+
+			System.out.println("If you see this meessage it means the loop cycle of the code has " + (5 - cishu)
+					+ " time(s) left");
+		}
+
+		double fin[][] = new double[X.length][2];
+
+		for (int i = 0; i < X.length; i++) {
+
+			fin[i][0] = X[i][0];
+			System.out.println(fin[i][0]);
+			fin[i][1] = X[i][1];
+			System.out.println(fin[i][1]);
+
+		}
+		double down = 2 * fin[0][0];
+		double twooneup = (-fin[1][0] + Math.sqrt(Math.pow(fin[1][0], 2) - (4 * fin[0][0] * fin[2][0])));
+		double twotwoup = (-fin[1][0] - Math.sqrt(Math.pow(fin[1][0], 2) - (4 * fin[0][0] * fin[2][0])));
+
+		double finsol1 = twooneup / down;
+		double finsol2 = twotwoup / down;
+
+		solution[noas] = finsol1;
+		noas++;
+		solution[noas] = finsol2;
+		noas++;
+		System.out.print("The rational root solution known for the given equation are" );
+		for (int i = 0; i < noas; i++) {
+
+			System.out.print( " "+solution[i]+",");
+
+		}
+
 		// System.out.println(calculation(Z, 2));
 
 		// System.out.println("Enter a positive integer:");
